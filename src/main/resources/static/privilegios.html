@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AddUser</title>
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--    <link rel="stylesheet" href="webjars/datatables/1.10.20/css/dataTables.bootstrap.min.css">-->
+
+    <!--    awesome font-->
+    <!--    <link rel="stylesheet" href="webjars/font-awesome/5.12.0/css/fontawesome.min.css">-->
+
+    <!-- Custom Theme files -->
+
+    <!--    bootstrap js-->
+    <script src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <!--    datatables js-->
+    <script src="webjars/datatables/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="index.js"></script>
+    <script src="User.js"></script>
+    <script src="dashboard.js"></script>
+    <link rel="stylesheet" href="/assets/css/cadastro.css">
+</head>
+<body>
+<br/>
+
+<div class="panel panel-success">
+    <!-- Default panel contents -->
+
+    <div class="panel-heading">
+        <div id="navbar" class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/oauth">Início</a></li>
+                <li><a href="AddUser.html" >Pagina Anterior</a></li>
+                <li><a href="#">Previlegios dos Usuarios</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="home.html"><i class="fa fa-createdby"></i>Sair</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+
+
+    <div class="container" >
+        <a class="links" id="paracadastro" ></a>
+        <!--FORMULÁRIO DE CADASTRO-->
+        <div id="cadastro">
+            <p>
+                <h1> Atribuir privilegios</h1>
+                <p>
+                <div>
+                    <input type = "checkbox" id = "codificação" name = "interesse" valor = "codificação">
+                    <label id = "coding">Previlegio de Adicionar um determinado documento </label>
+                </div>
+                </p>
+                <p>
+                <div>
+            <label>
+                <p>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label for="filter_category">Categoria </label>
+                        <select class="form-control" name="filter_category" id="filter_category">
+                        </select>
+                    </div>
+                </div><!-- /.col-lg-6 -->
+            </p>
+            </label>
+                 </div>
+                </p>
+
+            <p>
+            <div>
+                <input type = "checkbox"  name = "interesse" valor = "">
+                <label > Previlegio de remover documentos </label>
+            </div><br>
+            </p>
+            <p>
+                <div>
+                    <label>
+        <p>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="filter_category">Categoria </label>
+                <select class="form-control" name="filter_category" >
+                </select>
+            </div>
+        </div><!-- /.col-lg-6 -->
+        </p>
+        </label>
+    </div>
+
+
+                <div>
+                    <input type = "checkbox" id = "" name = "interesse" valor = "arte">
+                    <label > Previlegio de apagar uma determinada categoria </label>
+                </div><br>
+
+              </p>
+    <div>
+        <label>
+            <p>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="filter_category">Categoria </label>
+                    <select class="form-control" name="filter_category" >
+                    </select>
+                </div>
+            </div><!-- /.col-lg-6 -->
+            </p>
+        </label>
+    </div>
+                <p>
+                <div>
+                    <input type = "checkbox"  nome = "interesse" valor = "esportes">
+                    <label for = ""> Previlegio de editar um documento</label>
+                </div><br>
+                </p>
+    <div>
+        <label>
+            <p>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="filter_category">Categoria </label>
+                    <select class="form-control" name="filter_category" >
+                    </select>
+                </div>
+            </div><!-- /.col-lg-6 -->
+            </p>
+        </label>
+    </div>
+               <p>
+                <div>
+                    <input type = "checkbox"  nome = "interesse" valor = "cozinhar">
+                    <label > Previlegio de Adicionar um usuario</label>
+                </div><br>
+                </p>
+    <div>
+        <label>
+            <p>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="filter_category">Categoria </label>
+                    <select class="form-control" name="filter_category">
+                    </select>
+                </div>
+            </div><!-- /.col-lg-6 -->
+            </p>
+        </label>
+    </div>
+
+                <p>
+                    <button class="button_add" onclick="">Atribuir</button>
+                </p>
+
+                <p class="link">
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

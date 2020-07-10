@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AddUser</title>
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--    <link rel="stylesheet" href="webjars/datatables/1.10.20/css/dataTables.bootstrap.min.css">-->
+
+    <!--    awesome font-->
+    <!--    <link rel="stylesheet" href="webjars/font-awesome/5.12.0/css/fontawesome.min.css">-->
+
+    <!-- Custom Theme files -->
+
+    <!--    bootstrap js-->
+    <script src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <!--    datatables js-->
+    <script src="webjars/datatables/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="index.js"></script>
+    <script src="User.js"></script>
+    <script src="dashboard.js"></script>
+    <link rel="stylesheet" href="/assets/css/cadastro.css">
+</head>
+<body>
+<br/>
+
+<div class="panel panel-success">
+    <!-- Default panel contents -->
+
+    <div class="panel-heading">
+        <div id="navbar" class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/oauth">Início</a></li>
+                <li><a href="/usuario" >Pagina Anterior</a></li>
+                <li><a href="privilegios.html">Previlegios dos Usuarios</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="home.html"><i class="fa fa-createdby"></i>Sair</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+
+
+    <div class="container" >
+        <a class="links" id="paracadastro" ></a>
+        <!--FORMULÁRIO DE CADASTRO-->
+        <div id="cadastro">
+            <div>
+                <h1> Adicionar Usuario</h1>
+                <label for="nome_cad">Nome do Usuario</label>
+                <p>
+                    <input id="nome_cad" name="nome_cad" required="required" type="text" placeholder="Nome" />
+                </p>
+                <label for="nome_cad">sobre nome     </label>
+                <p>
+                    <input id="nome_cad2" name="nome_cad2" required="required" type="text" placeholder="Sobre Nome" />
+                </p>
+                <label for="email_cad">E-mail      </label>
+                <p>
+                    <input id="email_cad" name="email_cad" required="required" type="email" placeholder="Email"/>
+                </p>
+                <label for="senha_cad">Senha do Usuario</label>
+                <p>
+                    <input id="senha_cad" name="senha_cad" required="required" type="password" placeholder="1234"/>
+                </p>
+                <br>
+
+                    <button  class="button_add" onclick="alertAddUser()">Cadastrar</button>
+
+
+                <p class="link">
+                    <a href="privilegios.html">A tribuir Privilegios</a>
+
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

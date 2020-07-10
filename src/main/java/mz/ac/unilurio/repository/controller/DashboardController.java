@@ -47,9 +47,6 @@ public class DashboardController {
 
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private CategoryRepository categoryRepository;
 
     @Autowired
@@ -260,15 +257,6 @@ private Map<String, Document> convertDBFilesToHashMap(Iterable<Document> documen
         return document;
     }
 
-    @GetMapping(value = "/returnOllUserr", produces = "application/json")
-    public @ResponseBody List<User> user() throws IOException {
-        List<User> user = userRepository.findByUser();
-        return user;
-    }
-
-
-
-
     @DeleteMapping(value = "/delete/{id}", produces = "application/json")
     public @ResponseBody
     ResponseEntity<Object> delete(@PathVariable(name = "id") String id) throws IOException {
@@ -301,9 +289,6 @@ private Map<String, Document> convertDBFilesToHashMap(Iterable<Document> documen
         List<Category> categories = categoryRepository.findAll();
         return categories;
     }
-
-
-
 
     @GetMapping(value = "/type/all", produces = "application/json")
     public @ResponseBody

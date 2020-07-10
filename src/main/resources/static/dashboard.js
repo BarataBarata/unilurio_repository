@@ -1,4 +1,41 @@
 
+function anexo(){
+
+    var option = '';
+    for (var i=2020; i>2005; i--){
+        option+='<option value="'+i+'">'+i+'</option>';
+    }
+    $('[name="year2"]').html(option);
+
+    $.ajax({
+        url:"/category/all",
+        method: 'GET'
+    }).done(function(data){
+        var option = '';
+        for (var i = 0; i < data.length; i++){
+            option+='<option value="'+data[i].id+'">'+data[i].category+'</option>';
+        }
+        $('[name="category2"]').html(option);
+
+    });
+
+    $.ajax({
+        url:"/type/all",
+        method: 'GET'
+    }).done(function(data){
+        var option = '';
+        for (var i = 0; i < data.length; i++){
+            option+='<option value="'+data[i].id+'">'+data[i].type+'</option>';
+        }
+        $('[name="type2"]').html(option);
+
+    });
+
+    $('#formAddfile').modal('show');
+    $('#modal-title2').text('Anexar Ficheiro');
+}
+
+
 
 
 function notificacao() {
@@ -32,7 +69,6 @@ function  dados() {
 
 }
 
-
 function inserir_pesqisa() {
     var year = $('#filter_year').val() !=null ? $('#filter_year').val() : 'null';
     var category = $('#filter_category').val() !=null ? $('#filter_category').val() : 'null';
@@ -45,10 +81,6 @@ function inserir_pesqisa() {
 
 }
 
-function addUser() {
-    $('#addUser').modal('show'); // show bootstrap modal
-    $('.modal-title').text(''); // Set Title to Bootstrap modal title
-}
 
 function addfile() {
     $('#addfile').modal('show'); // show bootstrap modal
@@ -80,6 +112,7 @@ $(document).ready(function () {
                 option+='<option value="'+data[i].id+'">'+data[i].category+'</option>';
             }
             $('[name="filter_category"]').html(option);
+            $('[name="filter_category_pri"]').html(option);
 
         });
     }
@@ -279,7 +312,6 @@ $(document).ready(function () {
         });
     }
 
-    uniluriorepository
     function fetch_datatable_files() {
 
         table = $('#tblsync').DataTable({

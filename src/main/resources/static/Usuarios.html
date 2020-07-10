@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="webjars/datatables/1.10.20/css/dataTables.bootstrap.min.css">
+
+    <!--    awesome font-->
+    <link rel="stylesheet" href="webjars/font-awesome/5.12.0/css/fontawesome.min.css">
+
+    <!-- Custom Theme files -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/login_style.css">
+
+    <!--    bootstrap js-->
+    <script src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <!--    datatables js-->
+    <script src="webjars/datatables/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="index.js"></script>
+    <script src="User.js"></script>
+    <script src="dashboard.js"></script>
+
+</head>
+<body>
+<br/>
+
+ <div class="panel panel-success">
+    <!-- Default panel contents -->
+
+    <div class="panel-heading">
+        <div id="navbar" class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/oauth">Início</a></li>
+                <li><a href="dashboard.html" >Pagina Anterior</a></li>
+                <li><a href="/addUser" onclick="">Adicionar Usuarios</a></li>
+                <li><a href="#">Previlegios dos Usuarios</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="home.html"><i class="fa fa-createdby"></i>Sair</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div id="remove-message"></div>
+
+        <div class="result">
+
+            <div class="row">
+
+                <div class="col-lg-10">
+                    <div class="form-group">
+                        <label for="filter_user">Nome/Email </label>
+                        <input type="text" class="form-control" id="filter_user" name="filter_user"
+                               autocomplete="off">
+                    </div>
+                </div><!-- /.col-lg-6 -->
+
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label for="seacher_user"></label>
+                        <button typte="button" name="seacher_user" id="seacher_user"
+                                class="form-control btn btn-info" onclick="procurar()">
+                            Procurar
+                        </button>
+                    </div>
+
+                </div><!-- /.col-lg-6 -->
+            </div><!-- /.row -->
+
+            <!--<button class="btn btn-success pull-right" id="btn-add">Adicionar</button>-->
+        </div>
+    </div>
+
+ <div id="pages">
+    <div class="">
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nome Do Usuario</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Previlegios</th>
+                <th>Accao</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="tbo4">
+            </tbody>
+        </table>
+    </div>
+
+ </div>
+ </div>
+
+ </body>
+</html>

@@ -1,7 +1,6 @@
 
 
 
-
 function fechar() {
     window.location.href="home.html";
 }
@@ -11,8 +10,8 @@ function confirmaLogin() {
     $.ajax({
         url:"returnOllUserr",
     }).done(function (data) {
-        var email=$('#Form-email5').val();
-        var password=$('#Form-pass5').val();
+        var email=$('#email_login').val();
+        var password=$('#senha_login').val();
         var opcao=0;
 
         if(email!='' && password!='') {
@@ -32,29 +31,17 @@ function confirmaLogin() {
 }
 
 
-
-
-
-function loginModal() {
-    $('#darkModalForm').modal('show'); // show bootstrap modal
-    $('.modal-title').text('LOGIN'); // Set Title to Bootstrap modal title
-}
-
-
 $(document).ready(function () {
 
     initBinds();
     loadYears();
     loadCategories();
     refreshTable();
-
     function initBinds() {
 
         $('#filter').on('click', function () {
 
             var search = $('#filter_title').val();
-
-
             var queryString = window.location.search;
             var urlParams = new URLSearchParams(queryString);
 

@@ -40,7 +40,19 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
+
+    @Column(name = "adduser")
+    private Boolean adduser;
+
+    @Column(name = "deleteuser")
+    private Boolean deleteuser;
+
+    @Column(name = "removefile")
+    private Boolean removefile;
+
+    @Column(name = "addfile")
+    private Boolean addfile;
+
     @Column(name = "first_name")
     private String firstName;
     @Basic(optional = false)
@@ -89,6 +101,19 @@ public class User implements Serializable {
     public Integer getId() {
         return id;
     }
+
+    public  Boolean getAddUserAuthorization(){return adduser;}
+    public  void setAddUserAuthorization(Boolean Authorization ){ this.adduser=Authorization;}
+    public  Boolean getDeleteUserAuthorization(){return deleteuser;}
+    public  void setDeleteUserAuthorization(Boolean Authorization){this.deleteuser=Authorization;}
+    public  Boolean getRemoveFileAuthorization(){return removefile;}
+    public  void setRemoveFileAuthorization(Boolean Authorization){this.removefile=Authorization;}
+
+    public  Boolean getAddFileAuthorization(){return addfile;}
+    public  void setAddFileAuthorization(Boolean Authorization){
+        this.addfile=Authorization;
+    }
+
 
     public void setId(Integer id) {
         this.id = id;

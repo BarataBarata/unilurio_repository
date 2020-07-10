@@ -49,6 +49,8 @@
 
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/oauth">Início</a></li>
+                <li><a href="#" onclick="anexo()" >Anexar Ficheiro</a></li>
+                <li><a href="/usuario">Usuarios</a></li>
             <li><a href="#" data-toggle="modal" data-target="#formSyncModal" >Sincronizar</a></li>
             </ul>
 
@@ -349,58 +351,98 @@
     </div>
 </div>
 
+
+<!--  adicionar ficheiro-->
+<!-- create Editar modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="formAddfile">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id="modal-title2"></h4>
+            </div>
+            <form id="formEditar2" >
+                <input type="number" class="hidden" id="id2" name="id"/>
+                <input type="hidden" id="document2" name="document"/>
+                <input type="hidden" id="url2" name="url"/>
+
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Detalhes do Documento</legend>
+                                    <div class="form-group">
+                                        <label for="title">Título</label>
+                                        <input type="text" class="form-control" name="title2" id="title2" autocomplete="off">
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="year">Ano</label>
+                                        <select class="form-control" name="year2" id="year2">
+                                        </select>
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="category">Categoria</label>
+                                        <select class="form-control" name="category2" id="category2">
+                                        </select>
+                                        <span class="help-block"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="type">Tipo</label>
+                                        <select class="form-control" name="type2" id="type2">
+                                        </select>
+                                        <span class="help-block"></span>
+                                    </div>
+
+                                </fieldset>
+                            </div>
+
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Anexos</legend>
+
+                                    <div class="row">
+
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="category">Anexo</label>
+                                                <select class="form-control" name="attachment" id="attachment2">
+                                                </select>
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label></label>
+                                                <button class="btn btn-default">Carregar</button>
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Fechar
+                    </button>
+                    <button class="btn btn-primary" id="btn-save-editar2">Gravar</button>
+                </div>
+
+            </form>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!-- diciona ficheiro -->
 
-<div class="modal fade" id="addfile" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabe">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">x</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="post" id="add">
-                        <input class="btn btn-default" placeholder="Adicionar" type="file">
-                </form>
-            </div>
-
-        </div>
-    </div>
-
-</div>
-<!-- diciona usuario -->
-<div class="modal fade" id="addUser" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLab">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">x</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="post" id="addr">
-
-                    <div>
-                        <input type="email"  size="40px"  name="email" placeholder="Insira o Seu Email">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="password" name="password" placeholder="Insira a Senha">
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" ><a href="dashboard.html" id="cor2" >Adicionar</a></button>
-                    </div>
-
-                </form>
-            </div>
-
-        </div>
-    </div>
 
  </div>
 
