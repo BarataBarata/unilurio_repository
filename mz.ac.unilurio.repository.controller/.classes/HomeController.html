@@ -1,0 +1,277 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: HomeController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mz.ac.unilurio.repository.controller</a> ]
+</div>
+
+<h1>Coverage Summary for Class: HomeController (mz.ac.unilurio.repository.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HomeController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    8,3%
+  </span>
+  <span class="absValue">
+    (1/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    1,4%
+  </span>
+  <span class="absValue">
+    (1/ 72)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mz.ac.unilurio.repository.controller;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import mz.ac.unilurio.repository.model.*;
+<i>4</i>&nbsp;import mz.ac.unilurio.repository.repository.DocumentRepository;
+<i>5</i>&nbsp;import mz.ac.unilurio.repository.repository.UserRepository;
+<i>6</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>7</i>&nbsp;import org.springframework.http.HttpStatus;
+<i>8</i>&nbsp;import org.springframework.http.ResponseEntity;
+<i>9</i>&nbsp;import org.springframework.stereotype.Controller;
+<i>10</i>&nbsp;import org.springframework.web.bind.annotation.*;
+<i>11</i>&nbsp;import javax.annotation.Nullable;
+<i>12</i>&nbsp;import java.io.IOException;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;import java.util.*;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;@Controller
+<b class="fc"><i>17</i>&nbsp;public class HomeController {</b>
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    @Autowired
+<i>21</i>&nbsp;    private MailService mailService;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    @Autowired
+<i>25</i>&nbsp;    private DocumentRepository repository;
+<i>26</i>&nbsp;    private UserRepository userRepository;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @GetMapping(value = &quot;/dashboard&quot;)
+<i>29</i>&nbsp;    public String dashboard() throws Exception {
+<b class="nc"><i>30</i>&nbsp;        return &quot;dashboard.html&quot;;</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    @GetMapping(value = &quot;/sendMail/{assunto}/{mensagem}/{email}&quot;, produces = &quot;application/json&quot;)
+<i>35</i>&nbsp;    public @ResponseBody   String showEmail(@Nullable @PathVariable(name=&quot;assunto&quot;) Optional&lt;String&gt;  assunto, @Nullable @PathVariable(name=&quot;mensagem&quot;) Optional&lt;String&gt;  mensagem, @Nullable @PathVariable(name=&quot;email&quot;) Optional&lt;String&gt;  email)throws IOException {
+<b class="nc"><i>36</i>&nbsp;        String Assunto = assunto.get().equals(&quot;null&quot;) ? null : assunto.get();</b>
+<b class="nc"><i>37</i>&nbsp;        String Mensagen = mensagem.get().equals(&quot;null&quot;) ? null : mensagem.get();</b>
+<b class="nc"><i>38</i>&nbsp;        String Email = email.get().equals(&quot;null&quot;) ? null : email.get();</b>
+<i>39</i>&nbsp;
+<b class="nc"><i>40</i>&nbsp;        String message = Mensagen +&quot;\n\n Datos de contacto: &quot; + &quot;\n Assunto: &quot; + &quot;\nE-mail: &quot; + Email;</b>
+<b class="nc"><i>41</i>&nbsp;        mailService.sendMail(&quot;bbarata@unilurio.ac.mz&quot;,Email,Assunto,message);</b>
+<i>42</i>&nbsp;
+<b class="nc"><i>43</i>&nbsp;        return &quot;dashboard&quot;;</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    @GetMapping(value = &quot;/&quot;)
+<i>48</i>&nbsp;    public String showPage() throws Exception {
+<b class="nc"><i>49</i>&nbsp;        return &quot;home.html&quot;;</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    @GetMapping(value = &quot;/retornaDadosAfiltrar&quot;, produces = &quot;application/json&quot;)
+<i>53</i>&nbsp;    public @ResponseBody ArrayList retorna(){
+<b class="nc"><i>54</i>&nbsp;        Pesquisa pesquisa=new Pesquisa();</b>
+<b class="nc"><i>55</i>&nbsp;        ArrayList&lt;String&gt; listaDosDados=new ArrayList();</b>
+<b class="nc"><i>56</i>&nbsp;        listaDosDados.add(Pesquisa.getTitulo());</b>
+<b class="nc"><i>57</i>&nbsp;        listaDosDados.add(Pesquisa.getAno());</b>
+<b class="nc"><i>58</i>&nbsp;        listaDosDados.add(Pesquisa.getCategoria());</b>
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;
+<b class="nc"><i>61</i>&nbsp;        return listaDosDados;</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    @GetMapping(value = &quot;/retornaDadosLoginAfiltrar&quot;, produces = &quot;application/json&quot;)
+<i>67</i>&nbsp;    public @ResponseBody ArrayList retornaDadosLogin(){
+<b class="nc"><i>68</i>&nbsp;        Login login=new Login();</b>
+<b class="nc"><i>69</i>&nbsp;        ArrayList&lt;String&gt; listaLogin=new ArrayList();</b>
+<b class="nc"><i>70</i>&nbsp;        listaLogin.add(login.getEmail());</b>
+<b class="nc"><i>71</i>&nbsp;        listaLogin.add(login.getPassword());</b>
+<i>72</i>&nbsp;
+<b class="nc"><i>73</i>&nbsp;        return listaLogin;</b>
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    @GetMapping(value = &quot;/recebeDadosAfiltrar/{year}/{category}/{search}&quot;, produces = &quot;application/json&quot;)
+<i>81</i>&nbsp;    public @ResponseBody   ArrayList showLogin(@Nullable @PathVariable(name=&quot;year&quot;) Optional&lt;String&gt;  year, @Nullable @PathVariable(name=&quot;category&quot;) Optional&lt;String&gt;  category, @Nullable @PathVariable(name=&quot;search&quot;) Optional&lt;String&gt;  search)throws IOException {
+<b class="nc"><i>82</i>&nbsp;        String tempYear = year.get().equals(&quot;null&quot;) ? null : year.get();</b>
+<b class="nc"><i>83</i>&nbsp;        String tempCategory = category.get().equals(&quot;null&quot;) ? null : category.get();</b>
+<b class="nc"><i>84</i>&nbsp;        String tempSearch = search.get().equals(&quot;null&quot;) ? null : search.get();</b>
+<i>85</i>&nbsp;
+<b class="nc"><i>86</i>&nbsp;        Pesquisa pesquisa=new Pesquisa(tempYear,tempSearch,tempCategory);</b>
+<b class="nc"><i>87</i>&nbsp;        ArrayList&lt;String&gt; lista=new ArrayList();</b>
+<i>88</i>&nbsp;
+<b class="nc"><i>89</i>&nbsp;        lista.add(Pesquisa.getTitulo());</b>
+<b class="nc"><i>90</i>&nbsp;        lista.add(Pesquisa.getAno());</b>
+<b class="nc"><i>91</i>&nbsp;        lista.add(Pesquisa.getCategoria());</b>
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;
+<b class="nc"><i>94</i>&nbsp;      return  lista;</b>
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    @GetMapping(value = &quot;/recebeDadosLoginAfiltrar/{email}/{password}&quot;, produces = &quot;application/json&quot;)
+<i>100</i>&nbsp;    public @ResponseBody   ArrayList showbLogin(@Nullable @PathVariable(name=&quot;email&quot;) Optional&lt;String&gt;  email, @Nullable @PathVariable(name=&quot;password&quot;) Optional&lt;String&gt; password)throws IOException {
+<b class="nc"><i>101</i>&nbsp;        String Email = email.get().equals(&quot;null&quot;) ? null : email.get();</b>
+<b class="nc"><i>102</i>&nbsp;        String Password = password.get().equals(&quot;null&quot;) ? null : password.get();</b>
+<i>103</i>&nbsp;
+<b class="nc"><i>104</i>&nbsp;        Login login=new Login(Email,Password);</b>
+<b class="nc"><i>105</i>&nbsp;        ArrayList&lt;String&gt; lista=new ArrayList();</b>
+<i>106</i>&nbsp;
+<b class="nc"><i>107</i>&nbsp;        lista.add(login.getEmail());</b>
+<b class="nc"><i>108</i>&nbsp;        lista.add(login.getPassword());</b>
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;
+<b class="nc"><i>112</i>&nbsp;        return  lista;</b>
+<i>113</i>&nbsp;    }
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;    @GetMapping(value = &quot;/years/{year}/{category}/{search}&quot;, produces = &quot;application/json&quot;)
+<i>121</i>&nbsp;    public @ResponseBody List&lt;Document&gt; showYears(@Nullable @PathVariable(name=&quot;year&quot;) Optional&lt;String&gt;  year, @Nullable @PathVariable(name=&quot;category&quot;) Optional&lt;String&gt;  category, @Nullable @PathVariable(name=&quot;search&quot;) Optional&lt;String&gt;  search)throws IOException {
+<b class="nc"><i>122</i>&nbsp;        String tempYear = year.get().equals(&quot;null&quot;) ? null : year.get();</b>
+<b class="nc"><i>123</i>&nbsp;        String tempCategory = category.get().equals(&quot;null&quot;) ? null : category.get();</b>
+<b class="nc"><i>124</i>&nbsp;        String tempSearch = search.get().equals(&quot;null&quot;) ? null : search.get();</b>
+<i>125</i>&nbsp;
+<b class="nc"><i>126</i>&nbsp;        List&lt;Document&gt; response = repository.findByFilter(tempYear, tempCategory, &quot;GROUP BY d.year&quot;, tempSearch);</b>
+<b class="nc"><i>127</i>&nbsp;        return  response;</b>
+<i>128</i>&nbsp;    }
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;
+<i>131</i>&nbsp;    @GetMapping(value = &quot;/categories/{year}/{category}/{search}&quot;, produces = &quot;application/json&quot;)
+<i>132</i>&nbsp;    public @ResponseBody List&lt;Document&gt; showCategories(@Nullable @PathVariable(name=&quot;year&quot;) Optional&lt;String&gt;  year, @Nullable @PathVariable(name=&quot;category&quot;) Optional&lt;String&gt;  category, @Nullable @PathVariable(name=&quot;search&quot;) Optional&lt;String&gt;  search)throws IOException {
+<b class="nc"><i>133</i>&nbsp;        String tempYear = year.get().equals(&quot;null&quot;) ? null : year.get();</b>
+<b class="nc"><i>134</i>&nbsp;        String tempCategory = category.get().equals(&quot;null&quot;) ? null : category.get();</b>
+<b class="nc"><i>135</i>&nbsp;        String tempSearch = search.get().equals(&quot;null&quot;) ? null : search.get();</b>
+<i>136</i>&nbsp;
+<b class="nc"><i>137</i>&nbsp;        List&lt;Document&gt; response = repository.findByFilter(tempYear,tempCategory, &quot;GROUP BY d.category&quot;,tempSearch);</b>
+<b class="nc"><i>138</i>&nbsp;        return  response;</b>
+<i>139</i>&nbsp;    }
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;    @GetMapping(value = &quot;/listdbfiles/{year}/{category}/{search}&quot;, produces = &quot;application/json&quot;)
+<i>142</i>&nbsp;    public @ResponseBody
+<i>143</i>&nbsp;    ResponseEntity&lt;Object&gt; listDbFiles(@Nullable @PathVariable(name=&quot;year&quot;) Optional&lt;String&gt;  year, @Nullable @PathVariable(name=&quot;category&quot;) Optional&lt;String&gt;  category, @Nullable @PathVariable(name=&quot;search&quot;) Optional&lt;String&gt;  search)throws IOException {
+<b class="nc"><i>144</i>&nbsp;        String tempYear = year.get().equals(&quot;null&quot;) ? null : year.get();</b>
+<b class="nc"><i>145</i>&nbsp;        String tempCategory = category.get().equals(&quot;null&quot;) ? null : category.get();</b>
+<b class="nc"><i>146</i>&nbsp;        String tempSearch = search.get().equals(&quot;null&quot;) ? null : search.get();</b>
+<i>147</i>&nbsp;
+<b class="nc"><i>148</i>&nbsp;        Iterable&lt;Document&gt; documents = repository.findByFilter(tempYear, tempCategory, null,tempSearch);</b>
+<i>149</i>&nbsp;
+<b class="nc"><i>150</i>&nbsp;        List&lt;FileDisplay&gt; list = new ArrayList&lt;&gt;();</b>
+<i>151</i>&nbsp;
+<b class="nc"><i>152</i>&nbsp;        documents.forEach(document -&gt; {</b>
+<i>153</i>&nbsp;
+<b class="nc"><i>154</i>&nbsp;            FileDisplay display = new FileDisplay();</b>
+<b class="nc"><i>155</i>&nbsp;            display.setId(document.getGoogleId());</b>
+<i>156</i>&nbsp;
+<b class="nc"><i>157</i>&nbsp;            String title = &quot;&lt;a href=\&quot;&quot;+document.getUrl()+&quot;\&quot; target=\&quot;_blank\&quot;&gt;&quot;+document.getTitle()+&quot;&lt;/a&gt;&quot;;</b>
+<i>158</i>&nbsp;
+<b class="nc"><i>159</i>&nbsp;            display.setTitle(title);</b>
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;
+<b class="nc"><i>162</i>&nbsp;            display.setYear(document.getYear());</b>
+<b class="nc"><i>163</i>&nbsp;            display.setUrl(document.getUrl());</b>
+<i>164</i>&nbsp;
+<i>165</i>&nbsp;//            String html = &quot;&lt;a href=\&quot;#\&quot; rel=\&quot;&quot; + document.getGoogleId()+ &quot;\&quot; class=\&quot;view btn btn-default\&quot; title=\&quot;View\&quot; data-toggle=\&quot;tooltip\&quot;&gt;Ver&lt;/a&gt;&quot;;
+<b class="nc"><i>166</i>&nbsp;            String html =&quot;&quot;;</b>
+<b class="nc"><i>167</i>&nbsp;            html += &quot;&amp;nbsp;&amp;nbsp;&lt;a href=\&quot;#\&quot; rel=\&quot;&quot; + document.getGoogleId() + &quot;\&quot; class=\&quot;edit btn btn-default\&quot; title=\&quot;Edit\&quot; data-toggle=\&quot;tooltip\&quot;&gt;Editar&lt;/a&gt;&quot;;</b>
+<b class="nc"><i>168</i>&nbsp;            html += &quot;&amp;nbsp;&amp;nbsp;&lt;a href=\&quot;#\&quot; rel=\&quot;&quot; + document.getGoogleId()+ &quot;\&quot; class=\&quot;delete btn btn-default\&quot; title=\&quot;Delete\&quot; data-toggle=\&quot;tooltip\&quot;&gt;Remover&lt;/a&gt;&quot;;</b>
+<i>169</i>&nbsp;
+<b class="nc"><i>170</i>&nbsp;            String attach = &quot;&quot;;</b>
+<i>171</i>&nbsp;//            for (Attachment attachment:document.getAttachmentCollection()) {
+<i>172</i>&nbsp;////                attach+=&quot;&lt;div&gt;&lt;a href=\&quot;&quot;+attachment.getUrl()+&quot;\&quot; target=\&quot;_blank\&quot;&gt;&quot;+attachment.getTitle()+&quot;&lt;/a&gt;&lt;/div&gt;&quot;;
+<i>173</i>&nbsp;////            }
+<i>174</i>&nbsp;
+<b class="nc"><i>175</i>&nbsp;            display.setAttachments(attach);</b>
+<b class="nc"><i>176</i>&nbsp;            display.setAction(html);</b>
+<b class="nc"><i>177</i>&nbsp;            list.add(display);</b>
+<i>178</i>&nbsp;
+<b class="nc"><i>179</i>&nbsp;        });</b>
+<i>180</i>&nbsp;
+<i>181</i>&nbsp;
+<b class="nc"><i>182</i>&nbsp;        Map&lt;String, Object&gt; result = new HashMap&lt;String, Object&gt;();</b>
+<b class="nc"><i>183</i>&nbsp;        result.put(&quot;data&quot;,  list);</b>
+<b class="nc"><i>184</i>&nbsp;        result.put(&quot;recordsTotal&quot;, list.size());</b>
+<b class="nc"><i>185</i>&nbsp;        result.put(&quot;draw&quot;, 1);</b>
+<b class="nc"><i>186</i>&nbsp;        result.put(&quot;recordsFiltered&quot;, list.size());</b>
+<i>187</i>&nbsp;
+<b class="nc"><i>188</i>&nbsp;        return new ResponseEntity&lt;Object&gt;(result, HttpStatus.OK);</b>
+<i>189</i>&nbsp;
+<i>190</i>&nbsp;//        return  documents;
+<i>191</i>&nbsp;    }
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;
+<i>194</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-10 08:49</div>
+</div>
+</body>
+</html>
