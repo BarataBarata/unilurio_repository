@@ -1,14 +1,144 @@
 
+ function ocultar_Opcao_Remover_Usuario(opcao) {
+     $.ajax({
+         url:"/send_Ocultar_Op_Remover_Usuario/"+opcao,
+     });
+ }
 
+ function ocultar_Opcao_Adicionar_Usuario(opcao) {
+     $.ajax({
+         url:"/send_Ocultar_Op_Adicionar_Usuario/"+opcao,
+     });
+ }
 
-function fechar() {
-    window.location.href="home.html";
+function ocultar_Opc_Remover_Documentos(opcao) {
+    $.ajax({
+        url:"/send_Op_EliminarDocumento/"+opcao,
+    });
+}
+
+function ocultar_Opcao_AddUser_Link(opcao) {
+    $.ajax({
+        url:"/send_Op_OcultarPagina_Usuario/"+opcao,
+    });
+}
+
+function ocultar_Opc_Editar_Documento(opcao) {
+    $.ajax({
+        url:"/send_Op_EditarDocumento/"+opcao,
+    });
 }
 
 
+ function alertAddUser()
+ {
+     var x;
+     var r=confirm("Adicionar! ?");
+     if (r==true)
+     {
+         var nome_user=$('#nome_cad').val();
+         var email_user=$('#email_cad').val();
+         var password_user=$('#senha_cad').val();
+         var opcao;
+
+         $.ajax({
+             url: "/addteUser/"+nome_user+"/"+email_user+"/"+password_user,
+         });
+         alert(" Usuario adicionado com sucesso...");
+
+
+         $.ajax({
+             url:"/returnOllUserr",
+         }).done(function (data) {
+             var id;
+                 for (var i = 0; i < data.length; i++) {
+                     if (email_user == data[i].email && data[i].password == password_user) {
+                        id=data[i].id;
+                        break;
+                     }
+
+                 }
+             atribuir_Privilegios(id);
+         });
+
+         usuarios(); // algo por estudar
+     }
+     else
+     {
+     }
+     //document.getElementById("demo").innerHTML=x;
+ }
+
+  function atribuir_Privilegios(opcao) { // adiciona atraveis de ip
+      var opcao1=document.getElementsByName("p1");
+      var opcao2=document.getElementsByName("p2");
+      var opcao3=document.getElementsByName("p3");
+      var opcao4=document.getElementsByName("p4");
+      var opcao5=document.getElementsByName("p5");
+
+      if(opcao1[0].checked==true){
+          $.ajax({
+              url: "/adicionar_Privilegios_de_editar_um_Documento/"+true+"/"+opcao,
+          });
+      }
+      if(opcao2[0].checked==true){
+          $.ajax({
+              url: "/adicionar_Privilegios_de_remover_Documento/"+true+"/"+opcao,
+          });
+      }
+      if(opcao3[0].checked==true){
+          $.ajax({
+              url: "/adicionar_Privilegios_de_removerUsuario/"+true+"/"+opcao,
+          });
+      }
+      if(opcao4[0].checked==true){
+          $.ajax({
+              url: "/adicionar_Privilegios_de_Adicionar_Usuario/"+true+"/"+opcao,
+          });
+      }
+      if(opcao5[0].checked==true){
+          $.ajax({
+              url: "/adicionar_Privilegios_de_Acessar_Pagina_De_Usuarios/"+true+"/"+opcao,
+          });
+      }
+  }
+
+
+ function ocultar_Link_Adicionar_Usuarios() {
+     var html='';
+     $.ajax({
+         url: "/get_Ocultar_Opcao_Adicionar_Usuarios",
+     }).done(function (data) {
+         if(data==true) {
+             html += '<a href="/addUser">Adicionar Usuarios</a>';
+             $("#adicionar_usuario").html(html);
+         }else{
+             html +='<a href="/addUser" style="display:none">Adicionar Usuarios</a>';
+             $("#adicionar_usuario").html(html);
+         }
+     });
+ }
+
+
+function ocultar_Link_Usuarios() {
+    var html='';
+    $.ajax({
+        url: "/getOpcaoOcultarPagina_Usuarios",
+    }).done(function (data) {
+        if(data==true) {
+            html += '<a href="/usuario">Usuarios</a>';
+            $(".ver").html(html);
+        }else{
+            html += '<a href="/usuario" style="display:none">Usuarios</a>';
+            $(".ver").html(html);
+
+        }
+    });
+}
+
 function confirmaLogin() {
     $.ajax({
-        url:"returnOllUserr",
+        url:"/returnOllUserr",
     }).done(function (data) {
         var email=$('#email_login').val();
         var password=$('#senha_login').val();
@@ -17,11 +147,42 @@ function confirmaLogin() {
         if(email!='' && password!='') {
             for (var i = 0; i < data.length; i++) {
                 if (email == data[i].email && data[i].password == password) {
+                    if(data[i].removeFileAuthorization==true){
+                        ocultar_Opc_Remover_Documentos(true);
+                    }else{
+                        ocultar_Opc_Remover_Documentos(false);
+                    }
+                    if(data[i].acess_userAuthorization==true){
+                        ocultar_Opcao_AddUser_Link(true);
+                    }else{
+                        ocultar_Opcao_AddUser_Link(false);
+                     }
+                    // //........
+                    if(data[i].active==true){
+                          ocultar_Opc_Editar_Documento(true);
+                    }else{
+                          ocultar_Opc_Editar_Documento(false);
+                    }
+
+
+                    if(data[i].deleteUserAuthorization==true){
+                        ocultar_Opcao_Remover_Usuario(true);
+                    }else{
+                        ocultar_Opcao_Remover_Usuario(false);
+                    }
+
+                    if(data[i].addUserAuthorization==true){
+                        ocultar_Opcao_Adicionar_Usuario(true);
+                    }else{
+                        ocultar_Opcao_Adicionar_Usuario(false);
+                    }
                     opcao = 1;
                 }
             }
             if (opcao == 1) {
+
                 window.location.href = "dashboard.html";
+
             } else {
                 $('#aviso').html("Nao tem permissao para acessar a area...");
             }
@@ -32,7 +193,8 @@ function confirmaLogin() {
 
 
 $(document).ready(function () {
-
+    ocultar_Link_Adicionar_Usuarios();
+    ocultar_Link_Usuarios();
     initBinds();
     loadYears();
     loadCategories();

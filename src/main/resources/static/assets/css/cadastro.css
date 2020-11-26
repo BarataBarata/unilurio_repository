@@ -137,6 +137,13 @@ nmargin:10 auto;
 
 }
 
+#alinhar {
+    margin: 0 15px;
+    display:inline-block; //Typically a button wouldn't need its own line
+nmargin:10 auto;
+    width: 200px; //or whatever
+}
+
 
 .butao:hover{
     background: #4ab3c6;
@@ -259,4 +266,11 @@ nmargin:10 auto;
         opacity: 0;
         transform: translateX(-20px);
     }
+}
+.paragrafo{
+    color:#464646;
+}
+.hr{
+    border:5px;
+    color: red;
 }

@@ -4,14 +4,31 @@ var proximo=0;
 var tamanho=0;
 var seacher_user;
 var opcao=0;
-var opcaodelete=-8;
+var opcao_User;
+var id_user_a_lancar;
+var a1op=false;
+var a2op=false;
+var a3op=false;
+var a4op=false;
+var a5op=false;
+var delete_opcao=0;
 
 
-function alertDelete()
+function atualizar() {
+    a1op=false;
+    a2op=false;
+    a3op=false;
+    a4op=false;
+    a5op=false;
+}
+
+
+function alertDelete(opcaodelete)
 {
     var r=confirm(" DESEJA ELIMINAR O USUARIO ?");
     if (r==true)
     {
+
             $.ajax({
                 url: "/deleteUser/"+opcaodelete,
             });
@@ -30,29 +47,11 @@ function alertDelete()
 
 
 
-function alertAddUser()
-{
-    var x;
-    var r=confirm("Adicionar! ?");
-    if (r==true)
-    {
-            var nome_user=$('#nome_cad').val();
-            var email_user=$('#email_cad').val();
-            var password_user=$('#senha_cad').val();
 
-            $.ajax({
-                url: "/addteUser/"+nome_user+"/"+email_user+"/"+password_user,
-            });
-            alert(" Usuario adicionado com sucesso...");
-            usuarios();
-    }
-    else
-    {
-    }
-    //document.getElementById("demo").innerHTML=x;
-}
+      function visualizar() {
 
 
+      }
 function  concatena(string) {
     var stringaux='';
     var convertstr='';
@@ -102,6 +101,8 @@ function  incProximo() {
     usuarios();
 }
 
+
+
 function ircAnterior() {
     cont=0;
     if(anterior>0) {
@@ -116,10 +117,137 @@ function ircAnterior() {
 }
 
 
+ function remover_Privilegios() {
+
+    if(a1op==true) {
+        var opcao1 = document.getElementsByName("a1");
+
+        if(opcao1[0].checked==true){
+            $.ajax({
+                url: "/remove_Privilg_EditFILE/"+delete_opcao,
+            });
+        }
+    }
+    if(a2op==true) {
+        var opcao2 = document.getElementsByName("a2");
+        if(opcao2[0].checked==true){
+                $.ajax({
+                    url: "/remove_Privilg_addUSER/"+delete_opcao,
+                });
+        }
+    }
+    if(a3op==true) {
+        var opcao3 = document.getElementsByName("a3");
+        if(opcao3[0].checked==true) {
+                $.ajax({
+                    url: "/remove_Privilg_Delete_USER/"+delete_opcao,
+                });
+        }
+    }
+
+    if(a4op==true) {
+        var opcao4 = document.getElementsByName("a4");
+
+        if (opcao4[0].checked == true) {
+                $.ajax({
+                    url: "/remove_Privilg_View_Link/"+delete_opcao,
+                });
+        }
+
+    }
+
+    if(a5op==true) {
+        var opcao5 = document.getElementsByName("a5");
+
+        if (opcao5[0].checked == true) {
+                $.ajax({
+                    url: "/remove_Privilg_Deletar_FILE/"+delete_opcao,
+                });
+        }
+    }
+    }
+
+    function lancar_Privilegios(id_user){
+
+           var nome_user;
+           delete_opcao=id_user;
+            atualizar();
+            var tr='';
+            $.ajax({
+                url: "/returnOllUserr",
+            }).done(function (data) {
+                   for(var i=0;i<data.length;i++){
+                       if(data[i].id==id_user){
+                           nome_user=data[i].firstName;
+                               var tr='';
+                               if(data[i].active==true) {
+                                   a1op=true;
+                                   tr += '<p>' +
+                                       '<div>' +
+                                       '<input type = "checkbox" id = "a1" name = "a1" valor = ""/>' +
+                                       '<label id = "coding1">Previlegio de editar um determinado documento </label>' +
+                                       '</div>' +
+                                       '</p>';
+                               }
+                               if(data[i].addUserAuthorization==true){
+                                   a2op=true;
+                                   tr += '<p>' +
+                                       '<div>' +
+                                       '<input type = "checkbox" id = "a2" name = "a2" valor = ""/>' +
+                                       '<label id = "coding2">Previlegio de adicionar um determinado usuario </label>' +
+                                       '</div>' +
+                                       '</p>';
+                               }
+
+                               if(data[i].deleteUserAuthorization==true){
+                                   a3op=true;
+                                   tr += '<p>' +
+                                       '<div>' +
+                                       '<input type = "checkbox" id = "a3" name = "a3" valor = ""/>' +
+                                       '<label id = "coding3">Previlegio de eliminar um determinado usuario </label>' +
+                                       '</div>' +
+                                       '</p>';
+                               }
+
+                               if(data[i].acess_userAuthorization==true){
+                                   a4op=true;
+                                   tr += '<p>' +
+                                       '<div>' +
+                                       '<input type = "checkbox" id = "a4" name = "a4" valor = ""/>' +
+                                       '<label id = "coding4">Previlegio de visualizar usuarios  </label>' +
+                                       '</div>' +
+                                       '</p>';
+                               }
+
+                               if(data[i].removeFileAuthorization==true) {
+                                   a5op=true;
+                                   tr += '<p>' +
+                                       '<div>' +
+                                       '<input type = "checkbox" id = "a5" name = "a5" valor = ""/>' +
+                                       '<label id = "coding5">Previlegio de eliminar um determinado documento </label>' +
+                                       '</div>' +
+                                       '</p>';
+                               }
+
+                            break;
+                       }
+                   }
+                   $("#privilegios").html(tr);
+               $('#formAddfile2').modal('show');
+               $('#modal-title2').text(nome_user);
+            });
+
+        }
+
 function usuarios() {
     $.ajax({
-        url: "returnOllUserr",
+        url: "/returnOllUserr",
     }).done(function (data) {
+
+        $.ajax({
+            url: "/get_Ocultar_Opcao_Remover_Usuarios",
+        }).done(function (data2) {
+
         if(tamanho==0){
             inserTamanho(data.length);
         }
@@ -147,14 +275,17 @@ function usuarios() {
                     }
                 }
                 if(cont==str_seacher.length ||cont>0){
-                    opcaodelete=data[k].id;
                     tr += '<tr>' +
                         '<td class="paragrafo">' + data[k].firstName + '</td>' +
-                        '<td class="paragrafo">' + data[k].email + '</td>' +
+                        '<td class="paragrafo" >' + data[k].email + '</td>' +
                         '<td class="paragrafo">' + data[k].password + '</td>' +
-                        '<td>' + '<button class="button3"> Previlegio</button>' + '</td>' +
-                        '<td>' + '<button class="button2" onclick="alertDelete()"> Eliminar</button>' + '</td>';
-                    tr += '<td></td>' +
+                        '<td>' + '<button class="button3" onclick="lancar_Privilegios('+data[k].id+')"> Previlegio</button>' + '</td>';
+                       if(data2==true) {
+                           tr+='<td>' + '<button class="button2" onclick="alertDelete('+data[k].id+')"> Eliminar</button>' + '</td>';
+                       }else{
+                           tr+='<td>' + '<button class="button2" style="display: none" onclick="alertDelete('+data[k].id+')"> Eliminar</button>' + '</td>';
+                       }
+                     tr += '<td></td>' +
                         '</tr>';
                 }
 
@@ -169,19 +300,22 @@ function usuarios() {
                     '<td class="paragrafo">' + data[i].firstName + '</td>' +
                     '<td class="paragrafo">' + data[i].email + '</td>' +
                     '<td class="paragrafo">' + data[i].password + '</td>' +
-                    '<td>' + '<button class="button3"> Privilegio</button>' + '</td>' +
-                    '<td>' + '<button class="button2" onclick="alertDelete()"> Eliminar</button>' + '</td>';
-                tr += '<td></td>' +
-                    '</tr>';
-            }
-        }
 
+                    '<td>' + '<button class="button3" onclick=lancar_Privilegios('+data[i].id+')> Privilegio</button>' + '</td>';
+                if(data2==true) {
+                    tr+='<td>' + '<button class="button2" onclick="alertDelete('+data[i].id+')"> Eliminar</button>' + '</td>';
+                }else{
+                    tr+='<td>' + '<button class="button2" style="display: none" onclick="alertDelete('+data[i].id+')"> Eliminar</button>' + '</td>';
+                }
+                tr += '<td></td>' +
+                    '</tr>';            }
+        }
         tr+= '<tr>'+
             '<td>'+'<button id="anterior" onclick="ircAnterior()"> Anterior</button> '+' <button id="proximo" onclick="incProximo()"> Proximor</button>'+'</td>'+
             +'</tr>';
         $("#tbo4").html(tr);
 
-
+        });
     });
 }
 

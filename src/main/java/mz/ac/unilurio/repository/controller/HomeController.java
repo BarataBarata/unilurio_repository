@@ -73,8 +73,99 @@ public class HomeController {
         return listaLogin;
     }
 
+//
+//
+//    @GetMapping(value = "/sendOpcaoOcultarUsuarioLink/{opcao}", produces = "application/json")
+//    public @ResponseBody   void showUse(@Nullable @PathVariable(name="opcao") Optional<Boolean> opcao)throws IOException {
+//        Boolean Opcao = opcao.get().equals("null") ? null : opcao.get();
+//        Opcao opcao1=new Opcao();
+//        opcao1.setIsOcultarOpUsuario(Opcao);
+//    }
+//
+//    @GetMapping(value = "/RetornoOpcaoOcultarUsuario_Link", produces = "application/json")
+//    public @ResponseBody boolean retornoOcultarOpcaoUsuario(){
+//        Opcao opcao1=new Opcao();
+//        return opcao1.getIsOcultarOpUsuario();
+//    }
+//
+//    @GetMapping(value = "/send_OpcaoOcultarPagina_Usuarios/{opcao}", produces = "application/json")
+//    public @ResponseBody   void showUser(@Nullable @PathVariable(name="opcao") Optional<Boolean> opcao)throws IOException {
+//        Boolean Opcao = opcao.get().equals("null") ? null : opcao.get();
+//        Opcao opca=new Opcao();
+//        opca.setIsOcultarAddUser(Opcao);
+//    }
+//
+//
+//    @GetMapping(value = "/OpcaoOcultarOpcaoEditarDocumento", produces = "application/json")
+//    public @ResponseBody void OcultarOpcao(){
+//        Opcao opcao1=new Opcao();
+//         opcao1.setOcultarOpDocumeno(true);
+//    }
+//
+//    @GetMapping(value = "/OpcaoOcultarOpcaoEliminarDocumento", produces = "application/json")
+//    public @ResponseBody void Ocultar(){
+//           Opcao opcao=new Opcao();
+//           opcao.oculta(true);
+//    }
+
+    @GetMapping(value = "/get_Ocultar_Opcao_Adicionar_Usuarios", produces = "application/json")
+    public @ResponseBody boolean get_Ocultar_Opcao_Adicionar_Usuarios(){
+        Opcao opcao=new Opcao();
+        return opcao.getOcultar_Opcao_Adicionar_Usuario();
+    }
+
+    @GetMapping(value = "/send_Ocultar_Op_Adicionar_Usuario/{opcao}", produces = "application/json")
+    public @ResponseBody   void send_Ocultar_Op_Adicionar_Usuario(@Nullable @PathVariable(name="opcao") Optional<Boolean> opcao)throws IOException {
+        boolean Opcao = opcao.get().equals("null") ? Boolean.parseBoolean(null) : opcao.get();
+        Opcao opca=new Opcao();
+        opca.setOcultar_Opcao_Adicionar_Usuario(Opcao);
+    }
 
 
+    @GetMapping(value = "/get_Ocultar_Opcao_Remover_Usuarios", produces = "application/json")
+    public @ResponseBody boolean get_Ocultar_Opcao_Remover_Usuarios(){
+        Opcao opcao=new Opcao();
+        return opcao.getOcultar_Opcao_Remover_Usuario();
+    }
+
+    @GetMapping(value = "/send_Ocultar_Op_Remover_Usuario/{opcao}", produces = "application/json")
+    public @ResponseBody   void send_Ocultar_Op_Remover_Usuario(@Nullable @PathVariable(name="opcao") Optional<Boolean> opcao)throws IOException {
+        boolean Opcao = opcao.get().equals("null") ? Boolean.parseBoolean(null) : opcao.get();
+        Opcao opca=new Opcao();
+        opca.setOcultar_Opcao_Remover_Usuario(Opcao);
+    }
+
+
+
+    @GetMapping(value = "/getOpcaoOcultarPagina_Usuarios", produces = "application/json")
+    public @ResponseBody boolean getOcultarOpcaoAddUsuario(){
+        Opcao opcao=new Opcao();
+        return opcao.getOcultarLink_AddUser();
+    }
+
+    @GetMapping(value = "/send_Op_OcultarPagina_Usuario/{opcao}", produces = "application/json")
+    public @ResponseBody   void send_Op_OcultarPagina_Usuario(@Nullable @PathVariable(name="opcao") Optional<Boolean> opcao)throws IOException {
+        boolean Opcao = opcao.get().equals("null") ? Boolean.parseBoolean(null) : opcao.get();
+        Opcao opca=new Opcao();
+        opca.setOcultarLink_AddUser(Opcao);
+    }
+
+
+    /// ocultar opcao eliminar documento
+
+    @GetMapping(value = "/send_Op_EliminarDocumento/{opcao}", produces = "application/json")
+    public @ResponseBody   void send_Op_EliminarDocumento(@Nullable @PathVariable(name="opcao") Optional<Boolean> opcao)throws IOException {
+        boolean Opcao = opcao.get().equals("null") ? Boolean.parseBoolean(null) : opcao.get();
+        Opcao opca=new Opcao();
+        opca.setOcultarOpcaoEliminarDocumento(Opcao);
+    }
+
+    @GetMapping(value = "/send_Op_EditarDocumento/{opcao}", produces = "application/json")
+    public @ResponseBody   void send_Op_EditarDocumento(@Nullable @PathVariable(name="opcao") Optional<Boolean> opcao)throws IOException {
+        boolean Opcao = opcao.get().equals("null") ? Boolean.parseBoolean(null) : opcao.get();
+        Opcao opca=new Opcao();
+        opca.setOcultar_Op_Editar_Documeno(Opcao);
+    }
 
 
     @GetMapping(value = "/recebeDadosAfiltrar/{year}/{category}/{search}", produces = "application/json")
@@ -95,7 +186,6 @@ public class HomeController {
     }
 
 
-
     @GetMapping(value = "/recebeDadosLoginAfiltrar/{email}/{password}", produces = "application/json")
     public @ResponseBody   ArrayList showbLogin(@Nullable @PathVariable(name="email") Optional<String>  email, @Nullable @PathVariable(name="password") Optional<String> password)throws IOException {
         String Email = email.get().equals("null") ? null : email.get();
@@ -107,15 +197,8 @@ public class HomeController {
         lista.add(login.getEmail());
         lista.add(login.getPassword());
 
-
-
         return  lista;
     }
-
-
-
-
-
 
     @GetMapping(value = "/years/{year}/{category}/{search}", produces = "application/json")
     public @ResponseBody List<Document> showYears(@Nullable @PathVariable(name="year") Optional<String>  year, @Nullable @PathVariable(name="category") Optional<String>  category, @Nullable @PathVariable(name="search") Optional<String>  search)throws IOException {
@@ -161,12 +244,23 @@ public class HomeController {
 
             display.setYear(document.getYear());
             display.setUrl(document.getUrl());
-
+            Opcao opcao =new Opcao();
 //            String html = "<a href=\"#\" rel=\"" + document.getGoogleId()+ "\" class=\"view btn btn-default\" title=\"View\" data-toggle=\"tooltip\">Ver</a>";
             String html ="";
-            html += "&nbsp;&nbsp;<a href=\"#\" rel=\"" + document.getGoogleId() + "\" class=\"edit btn btn-default\" title=\"Edit\" data-toggle=\"tooltip\">Editar</a>";
-            html += "&nbsp;&nbsp;<a href=\"#\" rel=\"" + document.getGoogleId()+ "\" class=\"delete btn btn-default\" title=\"Delete\" data-toggle=\"tooltip\">Remover</a>";
+            if(opcao.getOcultar_Op_Editar_Documeno()){
+              html += "&nbsp;&nbsp;<a href=\"#\" rel=\"" + document.getGoogleId() + "\" class=\"edit btn btn-default\" title=\"Edit\" data-toggle=\"tooltip\">Editar</a>";
 
+            }else {
+                html += "&nbsp;&nbsp;<a href=\"#\" style=\"display:none;\" rel=\"" + document.getGoogleId() + "\" class=\"edit btn btn-default\" title=\"Edit\" data-toggle=\"tooltip\">Editar</a>";
+
+            }
+            if (opcao.getOcultarOpcaoEliminarDocumento()){
+                html += "&nbsp;&nbsp;<a href=\"#\" rel=\"" + document.getGoogleId()+ "\" class=\"delete btn btn-default\" title=\"Delete\" data-toggle=\"tooltip\">Remover</a>";
+
+            }else {
+              html += "&nbsp;&nbsp;<a href=\"#\" style=\"display:none;\"  rel=\"" + document.getGoogleId()+ "\" class=\"delete btn btn-default\" title=\"Delete\" data-toggle=\"tooltip\">Remover</a>";
+
+            }
             String attach = "";
 //            for (Attachment attachment:document.getAttachmentCollection()) {
 ////                attach+="<div><a href=\""+attachment.getUrl()+"\" target=\"_blank\">"+attachment.getTitle()+"</a></div>";

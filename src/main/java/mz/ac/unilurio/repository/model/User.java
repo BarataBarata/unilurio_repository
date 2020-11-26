@@ -40,6 +40,8 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "acess_user")
+    private Boolean acess_user;
 
     @Column(name = "adduser")
     private Boolean adduser;
@@ -101,8 +103,9 @@ public class User implements Serializable {
     public Integer getId() {
         return id;
     }
-
+    public  Boolean getAcess_userAuthorization(){return acess_user;}
     public  Boolean getAddUserAuthorization(){return adduser;}
+    public  void setAcess_userAuthorization(Boolean Acess_user){ this.acess_user=Acess_user;}
     public  void setAddUserAuthorization(Boolean Authorization ){ this.adduser=Authorization;}
     public  Boolean getDeleteUserAuthorization(){return deleteuser;}
     public  void setDeleteUserAuthorization(Boolean Authorization){this.deleteuser=Authorization;}

@@ -29,6 +29,7 @@
 
     <script src="dashboard.js"></script>
     <script src="index.js"></script>
+    <script src="User.js"></script>
 </head>
 <body>
 
@@ -44,13 +45,14 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-
         <div id="navbar" class="navbar-collapse collapse">
 
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/oauth">Início</a></li>
                 <li><a href="#" onclick="anexo()" >Anexar Ficheiro</a></li>
-                <li><a href="/usuario">Usuarios</a></li>
+                <li class="ver"></li>
+
+
             <li><a href="#" data-toggle="modal" data-target="#formSyncModal" >Sincronizar</a></li>
             </ul>
 
@@ -74,7 +76,7 @@
                 <div class="panel panel-success">
                     <!-- Default panel contents -->
                     <div class="panel-heading">Sincronizar Documentos</div>
-
+                    <div class="ver"></div>
                     <div class="panel-body">
                         <div id="remove-message"></div>
                         <div class="result">
